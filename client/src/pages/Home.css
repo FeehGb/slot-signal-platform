@@ -1,0 +1,228 @@
+.home {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header */
+.home__header {
+    position: relative;
+    padding: 60px 24px 40px;
+    text-align: center;
+    overflow: hidden;
+}
+
+.home__header-bg {
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(to bottom, rgba(13, 17, 28, 0.1) 0%, rgba(13, 17, 28, 0.4) 30%, rgba(13, 17, 28, 0.9) 70%, rgba(13, 17, 28, 1) 100%),
+        url('/fortune-wise-banner.jpg') no-repeat center top;
+    background-size: cover;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.85;
+    /* Soft blend to not break the text readability */
+}
+
+.home__header-content {
+    position: relative;
+    max-width: 700px;
+    margin: 0 auto;
+    z-index: 1;
+}
+
+.home__title {
+    font-size: 2.5rem;
+    font-weight: 900;
+    line-height: 1.15;
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+}
+
+.home__title-accent {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.home__subtitle {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-bottom: 28px;
+    line-height: 1.5;
+}
+
+.home__stats {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+}
+
+.home__stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+.home__stat-value {
+    font-size: 1.8rem;
+    font-weight: 800;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.home__stat-label {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+/* Main */
+.home__main {
+    flex: 1;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 24px 60px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* Global Timer */
+.home__global-timer-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin: -10px auto 24px;
+}
+
+.home__global-timer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 12px 24px;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-full);
+    backdrop-filter: blur(10px);
+    width: max-content;
+    max-width: 90%;
+}
+
+.home__last-update {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.home__last-update strong {
+    color: #4d7cff;
+}
+
+.home__global-timer-icon {
+    font-size: 1.2rem;
+}
+
+.home__global-timer-text {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.home__global-timer-value {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #00e676;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 1px;
+}
+
+/* Grid */
+.home__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+}
+
+/* Loading */
+.home__loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 80px 20px;
+    color: var(--text-muted);
+}
+
+.home__spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(77, 124, 255, 0.2);
+    border-top-color: var(--accent-blue);
+    border-radius: 50%;
+    animation: rotate 0.8s linear infinite;
+}
+
+/* Empty */
+.home__empty {
+    text-align: center;
+    padding: 80px 20px;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+/* Footer */
+.home__footer {
+    text-align: center;
+    padding: 24px;
+    border-top: 1px solid rgba(100, 100, 255, 0.08);
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .home__title {
+        font-size: 1.8rem;
+    }
+
+    .home__stats {
+        gap: 20px;
+    }
+
+    .home__stat-value {
+        font-size: 1.4rem;
+    }
+
+    .home__grid {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .home__header {
+        padding: 40px 16px 24px;
+    }
+
+    .home__title {
+        font-size: 1.5rem;
+    }
+
+    .home__grid {
+        grid-template-columns: 1fr;
+    }
+}

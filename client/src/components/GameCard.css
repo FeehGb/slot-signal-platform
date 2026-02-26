@@ -1,0 +1,375 @@
+.game-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-card);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: fade-in 0.5s ease forwards;
+    backdrop-filter: blur(12px);
+    position: relative;
+}
+
+.game-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    border-color: var(--border-card-hover);
+    box-shadow: var(--shadow-card-hover);
+    background: var(--bg-card-hover);
+}
+
+.game-card--active {
+    border-color: rgba(0, 230, 118, 0.25);
+    box-shadow: 0 0 24px rgba(0, 230, 118, 0.08);
+}
+
+.game-card--active:hover {
+    border-color: rgba(0, 230, 118, 0.4);
+    box-shadow: var(--shadow-glow-green);
+}
+
+/* Image */
+.game-card__image-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1.2;
+    overflow: hidden;
+}
+
+.game-card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.game-card:hover .game-card__image {
+    transform: scale(1.08);
+}
+
+.game-card__image-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(to top, var(--bg-card) 0%, transparent 100%);
+    pointer-events: none;
+}
+
+/* Badge */
+.game-card__badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: linear-gradient(135deg, rgba(0, 230, 118, 0.9) 0%, rgba(0, 200, 83, 0.9) 100%);
+    color: #000;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 5px 10px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    animation: pulse-glow 2s infinite;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    z-index: 2;
+}
+
+.game-card__badge-dot {
+    width: 6px;
+    height: 6px;
+    background: #000;
+    border-radius: 50%;
+    animation: pulse-glow 1s infinite;
+}
+
+/* Provider Tag */
+.game-card__provider-tag {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    color: var(--text-secondary);
+    font-size: 0.65rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    z-index: 2;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Content */
+.game-card__content {
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.game-card__info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.game-card__title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.game-card__platform {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+/* ==================== METRICS ROW ==================== */
+.game-card__metrics {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-md);
+}
+
+.game-card__metric {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    min-width: 48px;
+}
+
+.game-card__metric-label {
+    font-size: 0.58rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+.game-card__metric-divider {
+    width: 1px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.06);
+    flex-shrink: 0;
+}
+
+/* Circular Progress */
+.circular-progress {
+    position: relative;
+    width: 48px;
+    height: 48px;
+}
+
+.circular-progress-text {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: 800;
+}
+
+/* ==================== BET INDICATOR ==================== */
+.game-card__bet {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 14px;
+    border-radius: var(--radius-sm);
+    border: 1px solid;
+    min-width: 90px;
+    transition: all 0.3s ease;
+}
+
+.game-card__bet-header {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.game-card__bet-icon {
+    font-size: 0.65rem;
+    font-weight: 900;
+    line-height: 1;
+}
+
+.game-card__bet-label {
+    font-size: 0.6rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    line-height: 1;
+}
+
+.game-card__bet-value {
+    font-size: 1.1rem;
+    font-weight: 900;
+    font-variant-numeric: tabular-nums;
+    line-height: 1.1;
+    letter-spacing: -0.5px;
+}
+
+.game-card__bet-bar {
+    width: 100%;
+    padding-top: 2px;
+}
+
+.game-card__bet-bar-track {
+    width: 100%;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.game-card__bet-bar-fill {
+    height: 100%;
+    border-radius: 2px;
+    transition: width 0.6s ease;
+}
+
+/* ==================== TIMER ==================== */
+.game-card__timer-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1px;
+}
+
+.game-card__timer-icon {
+    font-size: 0.9rem;
+}
+
+.game-card__timer-value {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--accent-gold);
+    font-variant-numeric: tabular-nums;
+}
+
+/* ==================== CTA BUTTON ==================== */
+.game-card__cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 12px 16px;
+    border-radius: var(--radius-md);
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    background: rgba(77, 124, 255, 0.15);
+    color: var(--accent-blue);
+    border: 1px solid rgba(77, 124, 255, 0.2);
+}
+
+.game-card__cta:hover {
+    background: rgba(77, 124, 255, 0.25);
+    transform: translateY(-1px);
+}
+
+.game-card__cta--active {
+    background: var(--gradient-cta);
+    color: #000;
+    border: none;
+    font-size: 0.9rem;
+}
+
+.game-card__cta--active:hover {
+    box-shadow: var(--shadow-glow-green);
+    transform: translateY(-2px);
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 640px) {
+    .game-card__metrics {
+        gap: 6px;
+        padding: 8px;
+    }
+
+    .game-card__bet {
+        min-width: 75px;
+        padding: 6px 10px;
+    }
+
+    .game-card__bet-value {
+        font-size: 0.95rem;
+    }
+}
+
+/* ==================== FALLBACK THUMBNAIL ==================== */
+.game-card__fallback {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #1a1b26 0%, #15161e 100%);
+    position: relative;
+    overflow: hidden;
+    gap: 12px;
+}
+
+.game-card__fallback-icon {
+    font-size: 3.5rem;
+    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.2));
+    animation: floating 3s ease-in-out infinite;
+    z-index: 2;
+}
+
+.game-card__fallback-title {
+    color: var(--text-primary, #fff);
+    font-size: 1.1rem;
+    font-weight: 800;
+    text-align: center;
+    padding: 0 16px;
+    margin: 0;
+    z-index: 2;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    background: linear-gradient(to right, #ffffff, #a5b4fc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.game-card__fallback-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120%;
+    height: 120%;
+    background: radial-gradient(circle, rgba(77, 124, 255, 0.15) 0%, transparent 60%);
+    z-index: 1;
+}
+
+@keyframes floating {
+    0% {
+        transform: translateY(0px) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-10px) rotate(5deg);
+    }
+
+    100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+}
