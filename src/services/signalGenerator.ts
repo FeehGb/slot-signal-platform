@@ -57,6 +57,9 @@ function getRandomBet(nivel: 'baixa' | 'media' | 'alta', gameName: string): numb
   // Fallback de segurança se nenhuma bet for aprovada no filtro
   if (validOptions.length === 0) validOptions = list;
 
+  // Para BET Alta, sempre retorna o menor valor possível da faixa
+  if (nivel === 'alta') return validOptions[0];
+
   // Usa potência apenas leve para tender aos valores mais baixos dentro de seu próprio grupo
   const randIndex = Math.pow(Math.random(), 1.5);
   const selectedIndex = Math.floor(randIndex * validOptions.length);
@@ -85,15 +88,22 @@ export function gerarSinais(): void {
     `);
 
     const transaction = db.transaction(() => {
+      // Fase 1: pré-selecionar no máximo 5 jogos aleatórios para BET Alta
+      const MAX_BET_ALTA = 5;
+      const shuffled = [...jogosSemSinal].sort(() => Math.random() - 0.5);
+      const altaSet = new Set(shuffled.slice(0, MAX_BET_ALTA).map(j => j.id));
+
       for (const jogo of jogosSemSinal) {
         const winRate = Math.floor(Math.random() * 27) + 72;
         const duracao = 10; // Exatamente 10 minutos (padrão global)
 
-        // Esmagadora probabilidade para bet 'baixa' (~85%), 'media' (~12%), 'alta' (~3%)
-        const rand = Math.random();
-        let nivel: 'baixa' | 'media' | 'alta' = 'baixa';
-        if (rand > 0.97) nivel = 'alta';
-        else if (rand > 0.85) nivel = 'media';
+        // BET Alta apenas para os 5 pré-selecionados; restante: ~87% baixa, ~13% media
+        let nivel: 'baixa' | 'media' | 'alta';
+        if (altaSet.has(jogo.id)) {
+          nivel = 'alta';
+        } else {
+          nivel = Math.random() > 0.87 ? 'media' : 'baixa';
+        }
 
         const valorBet = getRandomBet(nivel, jogo.nome);
 
